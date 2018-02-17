@@ -1,0 +1,17 @@
+- name: Create instance in EC2
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+  - name: Launch EC2 instance
+    ec2:
+      keypair: "{{ ec2_keypair }}"
+      group: "{{ ec2_security_group }}"
+      image: "{{ ec2_ami }}"
+      type: "{{ ec2_instance_type }}"
+      region: "{{ ec2_region }}"
+      instance_tags:
+          Name: "{{ tag_name }}"
+          server: "{{ ec2_security_group }}"
+      count: "{{ count }}"
+      wait: true
