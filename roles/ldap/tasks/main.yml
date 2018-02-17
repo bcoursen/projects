@@ -1,0 +1,12 @@
+---
+- name: Install openldap packages
+  yum: name={{ item }} state=present
+  with_items:
+    - openldap
+    - openldap-servers
+    - openldap-clients
+
+- name: Start openldap
+  systemd: name=slapd state=started enabled=yes
+
+   
