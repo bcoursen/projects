@@ -5,10 +5,10 @@
   become: true
   serial: 1
 
-  vars_prompt:
-    - name: state
-      prompt: "Enter the state of debugging [enabled|disabled]"
-      private: no
+  # vars_prompt:
+  #   - name: state
+  #     prompt: "Enter the state of debugging [enabled|disabled]"
+  #     private: no
 
   tasks:
     - name: Check for valid state
