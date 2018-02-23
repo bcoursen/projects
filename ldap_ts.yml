@@ -1,0 +1,50 @@
+---
+- name: Change ldap debugging
+  hosts: tower
+  gather_facts: false
+  become: true
+  serial: 1
+
+  vars_prompt:
+    - name: state
+      prompt: "Enter the state of debugging [enabled|disabled]"
+      private: no
+
+  tasks:
+    - name: Check for valid state
+      fail:
+        msg: Invalid state
+      when: (state != "enabled") and (state != "disabled")
+      delegate_to: localhost
+      run_once: yes
+
+    - name: Change debugging
+      lineinfile:
+        path: /etc/tower/conf.d/ldap.py
+        create: yes
+        group: awx
+        line: "LOGGING['handlers']['tower_warnings']['level'] =  'DEBUG'"
+        owner: root
+        mode:  0640
+        state: "{{ (state == 'enabled') | ternary('present','absent') }}"
+      register: debugging_change
+
+    - name: Get current state of tower
+      shell: |
+       export PATH=${PATH}:/sbin
+        ansible-tower-service status
+      register: tower_status_command
+      no_log: true
+      ignore_errors: true
+      # If tower is down we get an rc = 3 which causes the task to fail (so ignore it)
+
+    - debug:
+        msg:
+          - "Changed: {{ debugging_change.changed }}"
+          - "Tower running: {{ (tower_status_command.rc == 0) | ternary('Yes', 'No') }}"
+
+    - name: Restart tower
+      shell: |
+        export PATH=${PATH}:/sbin
+        ansible-tower-service restart
+      when: debugging_change.changed and tower_status_command.rc == 0
