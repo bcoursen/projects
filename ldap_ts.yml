@@ -1,6 +1,6 @@
 ---
 - name: Change ldap debugging
-  hosts: tower
+  hosts: all
   gather_facts: false
   become: true
   serial: 1
