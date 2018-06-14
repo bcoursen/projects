@@ -27,5 +27,9 @@
       wait: true
     register: ec2
 
-  - name: Pause for instance to be ready
-    pause: minutes=1
+    - name: Wait for system to become reachable over SSH
+      wait_for_connection:
+      timeout: 450
+
+#  - name: Pause for instance to be ready
+#    pause: minutes=1
