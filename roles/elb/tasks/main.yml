@@ -12,7 +12,7 @@
 
 - name: Create elb
   ec2_elb_lb:
-    name: test
+    name: jboss
     state: present
     ec2_region: us-west-1
     zones:
