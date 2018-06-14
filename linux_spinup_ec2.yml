@@ -8,7 +8,7 @@
     image: ami-ac5f2fcc
     type: t2.medium
     # security and server_group tag are the same name
-    security_group: test
+    security_group: jboss
     server: "{{ security_group }}"
     group: "{{ security_group }}"
 
