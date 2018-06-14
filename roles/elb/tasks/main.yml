@@ -7,6 +7,7 @@
   register: ec2_facts
 
 - name: debug ec2_info
+  verbosity: 2
   debug: var=ec2_facts.instances[0].instance_id
 
 - name: Create elb
