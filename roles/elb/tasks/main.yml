@@ -1,0 +1,25 @@
+---
+- ec2_instance_facts:
+    region: us-west-1
+    filters:
+      instance-state-name: running
+      "tag:server": jboss
+  register: ec2_facts
+
+- name: debug ec2_info
+  debug: var=ec2_facts.instances[0].instance_id
+
+- name: Create elb
+  ec2_elb_lb:
+    name: test
+    state: present
+    ec2_region: us-west-1
+    zones:
+      - us-west-1a
+      - us-west-1c
+    listeners:
+      - protocol: http
+        load_balancer_port: 8080
+        instance_port: 8080
+    security_group_names: jboss
+    instance_ids: "{{ ec2_facts.instances[0].instance_id }}"
