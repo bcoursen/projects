@@ -5,5 +5,5 @@
   tasks:
     - name: Ensure user is unlocked
       win_domain_user:
-        name: "{{ tower_user }}"
+        name: "{{ tower_user_name }}"
         account_locked: "{{ lock }}"
