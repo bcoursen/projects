@@ -6,12 +6,12 @@
   tasks:
     - name: Create Windows Domain Admin user
       win_domain_user:
-        name: {{ user_name }}
-        firstname: {{ first_name }}
-        surname: {{ last_name }}
-        company: {{ company }}
+        name: "{{ user_name }}"
+        firstname: "{{ first_name }}"
+        surname: "{{ last_name }}"
+        company: "{{ company }}"
         password: "{{ win_password }}"
-        state: {{ state }}
-        account_locked: {{ lock }}
+        state: "{{ state }}"
+        account_locked: "{{ lock }}"
         groups:
           - Domain Admins
