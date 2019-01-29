@@ -1,0 +1,9 @@
+---
+- name: Tower self service Windows user unlock
+  hosts: all
+
+  tasks:
+    - name: Ensure user is unlocked
+      win_domain_user:
+        name: "{{ tower_user }}"
+        account_locked: "{{ lock }}"
