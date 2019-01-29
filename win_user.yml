@@ -12,6 +12,5 @@
         company: "{{ company }}"
         password: "{{ win_password }}"
         state: "{{ state }}"
-        account_locked: "{{ lock }}"
         groups:
-          - Domain Admins
+          - Ansible Users
