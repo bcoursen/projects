@@ -1,0 +1,9 @@
+---
+- name: Network demo playbook router config
+  hosts: cisco
+  connection: network_cli
+  gather_facts: no
+
+  roles:
+    - { role: router_config,  when: router_reset == "False" }
+    - { router_config_reset, when: router_reset == "True" }
