@@ -1,0 +1,10 @@
+---
+- name: SNMP RO/RW STRING CONFIGURATION
+  hosts: cisco
+  gather_facts: no
+  connection: network_cli
+
+  roles:
+    - router_config.yml
+    - router_config_reset.yml
+      when: router_reset is defined and router_reset == "yes"
