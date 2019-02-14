@@ -1,5 +1,7 @@
 ---
 - include: router_config.yml
-  when: router_reset == "true"
+  when: router_reset is defined and router_reset == "true"
 - include: router_config_reset.yml
-  when: router_reset == "false"
+  when: router_reset is defined and router_reset == "false"
+- include: harden_ios
+  when: harden_ios is defined and harden_ios == "true"
