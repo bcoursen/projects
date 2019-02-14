@@ -1,0 +1,6 @@
+---
+- name: ENSURE THAT THE DESIRED SNMP STRINGS ARE DEFAULT
+  ios_config:
+    commands:
+      - snmp-server community ansible-public RW
+      - snmp-server community ansible-private RO

@@ -1,0 +1,5 @@
+---
+- include: router_config
+  when: router_reset == "true"
+- include: router_config_reset
+  when: router_reset == "fasle"
