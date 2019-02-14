@@ -6,4 +6,4 @@
 
   roles:
     - { role: router_config,  when: router_reset == "False" }
-    - { router_config_reset, when: router_reset == "True" }
+    - { role: router_config_reset, when: router_reset == "True" }
