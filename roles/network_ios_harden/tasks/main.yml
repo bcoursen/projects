@@ -1,4 +1,4 @@
 ---
 - name: ENSURE THAT ROUTERS ARE SECURE
   ios_config:
-    src: network_ios_harden/files/secure_router.cfg
+    src: roles/network_ios_harden/files/secure_router.cfg
